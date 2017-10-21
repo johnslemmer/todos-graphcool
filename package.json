@@ -1,0 +1,12 @@
+{
+  "name": "todos-graphcool",
+  "version": "1.0.0",
+  "description": "Todo List API using graphql-graphcool stack.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["todos", "graphql", "graphcool", "api"],
+  "author": "John Slemmer",
+  "license": "MIT"
+}
