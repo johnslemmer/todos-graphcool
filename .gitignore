@@ -58,5 +58,6 @@ typings/
 .env
 
 # graphcool
+.build
 build.zip
 .graphcoolrc
