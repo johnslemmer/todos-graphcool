@@ -1,6 +1,5 @@
 # TODO
 
-* Add User type
 * Add auth
 * Add ability to have lists owned by users
 * Certain list public
