@@ -5,6 +5,11 @@
 * Certain list public
   * This also means certain permissions.
 * so PERMISSIONS....
+* adding and API gateway on top of this????
+  * I think docs are still coming from graphcool
+  * maybe needs to be run on some other servless backend??
+  * if we want/need to change the CRUD api provided.
+  * do we as long as the permissions are great???
 * shooting for a server side replica of: https://github.com/meteor/todos
 
 Making a good graph cool boilerplate:
