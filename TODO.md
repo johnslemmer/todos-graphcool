@@ -1,12 +1,17 @@
 # TODO
 
 * Add ability to have lists owned by users
+  * This means adding the correct permissions.
 * Certain list public
+  * This also means certain permissions.
+* so PERMISSIONS....
 * shooting for a server side replica of: https://github.com/meteor/todos
 
 Making a good graph cool boilerplate:
 
 * Add linting
+* Can I add Flow? I know graphcool already supports typescript.
+but I'm just curious.
 * Add testing for functions
 * Add Babel transpiling for more future features???? (not sure what graphcool deploy is doing, but it looks like it is doing some of this.)
 * some standard NPM scripts
