@@ -1,6 +1,5 @@
 # TODO
 
-* Add auth
 * Add ability to have lists owned by users
 * Certain list public
 * shooting for a server side replica of: https://github.com/meteor/todos

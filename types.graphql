@@ -3,6 +3,7 @@ type User @model {
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String! @isUnique
+  password: String!
   lists: [List!]! @relation(name: "UserLists")
 }
 
