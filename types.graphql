@@ -7,15 +7,6 @@ type User @model {
   lists: [List!]! @relation(name: "UserLists")
 }
 
-type Todo @model {
-  id: ID! @isUnique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String!
-  isCompleted: Boolean! @defaultValue(value: "false")
-  list: List @relation(name: "ListTodos")
-}
-
 type List @model {
   id: ID! @isUnique
   createdAt: DateTime!
@@ -23,4 +14,13 @@ type List @model {
   name: String!
   todos: [Todo!]! @relation(name: "ListTodos")
   owner: User @relation(name: "UserLists")
+}
+
+type Todo @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  isCompleted: Boolean! @defaultValue(value: "false")
+  list: List! @relation(name: "ListTodos")
 }
