@@ -27,7 +27,141 @@ functions:
     schema: src/createRandomList.graphql
 
 permissions:
-- operation: "*"
+  # You can NOT create a user.  Forcing people to use the resolvers
+  # NOTE: this is commented out just for clarity and "completion" of the CRUD
+  # - operation: User.create
+
+  # You can only read your user information
+  - operation: User.read
+    authenticated: true
+    query: src/permissions/User.graphql:isCurrentUser
+    fields:
+      - id
+      - createdAt
+      - updatedAt
+      - email
+      - lists
+
+  # You can only update your user information
+  # TODO: add the ability to update email and password through some fancy
+  # resolvers.
+  - operation: User.update
+    authenticated: true
+    query: src/permissions/User.graphql:isCurrentUser
+    fields:
+      - lists
+
+  # You can only delete yourself
+  - operation: User.delete
+    authenticated: true
+    query: src/permissions/User.graphql:isCurrentUser
+
+  # You can only connect a list to a user if you are the owner of the list
+  # TODO: when this permission is evaluated the user isn't the owner yet,
+  # and it fails
+  - operation: UserLists.connect
+    authenticated: true
+    query: src/permissions/UserLists.graphql:isUserOwner
+
+  # You can only disconnect a list to a user if you are the owner of the list
+  - operation: UserLists.disconnect
+    authenticated: true
+    query: src/permissions/UserLists.graphql:isUserOwner
+
+  # Everyone can create a list
+  - operation: List.create
+    fields:
+      - name
+      - owner
+
+  # Everyone can read public lists
+  - operation: List.read
+    query: src/permissions/List.graphql:isPublic
+
+  # You can read lists that you own
+  - operation: List.read
+    authenticated: true
+    query: src/permissions/List.graphql:isUserOwner
+
+  # Everyone can update a public list's name and todos
+  - operation: List.update
+    query: src/permissions/List.graphql:isPublic
+    fields:
+      - name
+      - todos
+
+  # Everyone who is logged in can update a lists owner if the list is public
+  - operation: List.update
+    authenticated: true
+    query: src/permissions/List.graphql:isPublic
+    fields:
+      - owner
+
+  # You can update a list that you own
+  - operation: List.update
+    authenticated: true
+    query: src/permissions/List.graphql:isUserOwner
+    fields:
+      - name
+      - todos
+      - owner
+
+  # Everyone can delete a public list
+  - operation: List.delete
+    query: src/permissions/List.graphql:isPublic
+
+  # You can delete a list you own
+  - operation: List.delete
+    authenticated: true
+    query: src/permissions/List.graphql:isUserOwner
+
+  # Everyone can connect a todo to a public list
+  - operation: ListTodos.connect
+    query: src/permissions/ListTodos.graphql:isListPublic
+
+  # You can connect a todo to a list you own
+  - operation: ListTodos.connect
+    authenticated: true
+    query: src/permissions/ListTodos.graphql:isUserOwner
+
+  # Everyone can disconnect a todo from a list if the list is public
+  - operation: ListTodos.disconnect
+    query: src/permissions/ListTodos.graphql:isListPublic
+
+  # You can disconnect a todo from a list if you own the list
+  - operation: ListTodos.disconnect
+    authenticated: true
+    query: src/permissions/ListTodos.graphql:isUserOwner
+
+  # Everyone can create a todo
+  - operation: Todo.create
+
+  # Everyone can read public todos
+  - operation: Todo.read
+    query: src/permissions/Todo.graphql:isPublic
+
+  # You can read todos that are part of lists you own
+  - operation: Todo.read
+    authenticated: true
+    query: src/permissions/Todo.graphql:isUserOwner
+
+  # Everyone can update a todo if it is public
+  - operation: Todo.update
+    query: src/permissions/Todo.graphql:isPublic
+
+  # You can update a todo if you are the owner of the list it belongs to
+  - operation: Todo.update
+    authenticated: true
+    query: src/permissions/Todo.graphql:isUserOwner
+
+  # Everyone can delete a todo that belongs to a public list
+  - operation: Todo.delete
+    query: src/permissions/Todo.graphql:isPublic
+
+  # You can delte a todo if it belongs to a list you own
+  - operation: Todo.delete
+    authenticated: true
+    query: src/permissions/Todo.graphql:isUserOwner
 
 rootTokens:
 - mytoken

@@ -1,0 +1,15 @@
+query isUserOwner ($user_id: ID!, $ownerUser_id: ID!, $listsList_id: ID!) {
+  SomeListExists(filter: {
+    AND: [{
+      id: $listsList_id,
+      owner: {
+        id: $user_id,
+      },
+    }, {
+      id: $listsList_id,
+      owner: {
+        id: $ownerUser_id,
+      },
+    }]
+  })
+}

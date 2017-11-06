@@ -1,0 +1,19 @@
+query isPublic ($node_id: ID!) {
+  SomeTodoExists(filter: {
+    id: $node_id,
+    list: {
+      owner: null,
+    },
+  })
+}
+
+query isUserOwner ($user_id: ID!, $node_id: ID!) {
+  SomeTodoExists(filter: {
+    id: $node_id,
+    list: {
+      owner: {
+        id: $user_id,
+      },
+    },
+  })
+}

@@ -1,0 +1,15 @@
+query isListPublic ($listList_id: ID!) {
+  SomeListExists(filter: {
+    id: $listList_id,
+    owner: null,
+  })
+}
+
+query isUserOwner ($user_id: ID!, $listList_id: ID!) {
+  SomeListExists(filter: {
+    id: $listList_id,
+    owner: {
+      id: $user_id,
+    },
+  })
+}
