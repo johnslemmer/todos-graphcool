@@ -40,28 +40,24 @@ permissions:
       - createdAt
       - updatedAt
       - email
-      - lists
 
   # You can only update your user information
+  # NOTE: there is currnetly nothing for the user to update.
   # TODO: add the ability to update email and password through some fancy
   # resolvers.
-  - operation: User.update
-    authenticated: true
-    query: src/permissions/User.graphql:isCurrentUser
-    fields:
-      - lists
+  # - operation: User.update
+  #   authenticated: true
+  #   query: src/permissions/User.graphql:isCurrentUser
 
   # You can only delete yourself
   - operation: User.delete
     authenticated: true
     query: src/permissions/User.graphql:isCurrentUser
 
-  # You can only connect a list to a user if you are the owner of the list
-  # TODO: when this permission is evaluated the user isn't the owner yet,
-  # and it fails
+  # You can only connect a list to a user if setting yourself as the owner
   - operation: UserLists.connect
     authenticated: true
-    query: src/permissions/UserLists.graphql:isUserOwner
+    query: src/permissions/UserLists.graphql:isUserNewOwner
 
   # You can only disconnect a list to a user if you are the owner of the list
   - operation: UserLists.disconnect
@@ -70,9 +66,6 @@ permissions:
 
   # Everyone can create a list
   - operation: List.create
-    fields:
-      - name
-      - owner
 
   # Everyone can read public lists
   - operation: List.read
@@ -83,28 +76,25 @@ permissions:
     authenticated: true
     query: src/permissions/List.graphql:isUserOwner
 
-  # Everyone can update a public list's name and todos
+  # Everyone can update a public list
+  # NOTE: Update permisions only deal with non-relation fields.
+  # NOTE: if an updateList is called with only a ownerId (you are just
+  # trying to make a relation), then it will not be permitted.  Intead use
+  # addToUserLists... OR just modify a scalar field (aka name) as well and it
+  # will work. Curiously, removing a user works just fine when owner: null
+  # is passed to updateList.
+  # NOTE: the above is just the way graphcool works at the moment.  Probably
+  # a bug because ownerId is passed to update and kind of "looks" like it needs
+  # to pass permissions for the list update when really it is a short cut to
+  # connecting a relationship and should then thus be permitted by the above
+  # UsersLists.connect
   - operation: List.update
     query: src/permissions/List.graphql:isPublic
-    fields:
-      - name
-      - todos
-
-  # Everyone who is logged in can update a lists owner if the list is public
-  - operation: List.update
-    authenticated: true
-    query: src/permissions/List.graphql:isPublic
-    fields:
-      - owner
 
   # You can update a list that you own
   - operation: List.update
     authenticated: true
     query: src/permissions/List.graphql:isUserOwner
-    fields:
-      - name
-      - todos
-      - owner
 
   # Everyone can delete a public list
   - operation: List.delete

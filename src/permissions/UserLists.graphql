@@ -1,3 +1,12 @@
+query isUserNewOwner ($user_id: ID!, $ownerUser_id: ID!) {
+  SomeUserExists(filter: {
+    AND: [
+      { id: $user_id },
+      { id: $ownerUser_id },
+    ],
+  })
+}
+
 query isUserOwner ($user_id: ID!, $ownerUser_id: ID!, $listsList_id: ID!) {
   SomeListExists(filter: {
     AND: [{

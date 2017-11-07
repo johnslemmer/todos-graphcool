@@ -1,10 +1,5 @@
 # TODO
 
-* Add ability to have lists owned by users
-  * This means adding the correct permissions.
-* Certain list public
-  * This also means certain permissions.
-* so PERMISSIONS....
 * adding and API gateway on top of this????
   * I think docs are still coming from graphcool
   * maybe needs to be run on some other servless backend??
