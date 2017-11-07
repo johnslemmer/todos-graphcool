@@ -20,12 +20,6 @@ functions:
     handler:
       code: src/email-password/loggedInUser.ts
 
-  createRandomList:
-    handler:
-      code: src/createRandomList.js
-    type: resolver
-    schema: src/createRandomList.graphql
-
 permissions:
   # You can NOT create a user.  Forcing people to use the resolvers
   # NOTE: this is commented out just for clarity and "completion" of the CRUD

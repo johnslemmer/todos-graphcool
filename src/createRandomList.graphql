@@ -1,8 +1,0 @@
-type CreateRandomListPayload {
-  id: ID!
-}
-
-# TODO: would much prefer to return List
-extend type Mutation {
-  createRandomList(name: String!): CreateRandomListPayload
-}
