@@ -20,5 +20,8 @@
     "graphcool-lib": "^0.1.4",
     "graphql-request": "^1.4.0",
     "validator": "^9.0.0"
+  },
+  "devDependencies": {
+    "graphcool": "^0.8.5"
   }
 }
