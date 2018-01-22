@@ -1,6 +1,8 @@
 # todos-graphcool
 
-[![**WORK IN PROGRESS**](https://img.shields.io/badge/work-in--progress-red.svg)](TODO.md)
+**NO LONGER MAINTAINED**
+
+This was just a place to play around with the graphcool framework.  See https://github.com/johnslemmer/todos-db-prisma for a newer, better example.
 
 ## Getting Started
 
